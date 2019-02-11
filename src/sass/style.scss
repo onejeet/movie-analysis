@@ -1,0 +1,84 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+@mixin container(){
+    width: 50%;
+    margin: 0 auto;
+    @content;
+    @media all and (min-width:991px) and (max-width: 1149px){
+        width: 70%;
+        margin: 0 auto;
+        @content;
+    }
+    @media all and (max-width: 991px){
+        width: 90%;
+        margin: 0 auto;
+        @content;
+    }
+}
+
+.branding{
+    text-align: center;
+    margin:10px auto 30px;
+}
+
+table.movie-list{
+    margin:0 auto;
+    width: 90%;
+    text-align: center;
+    select{
+        display: block;
+        margin:8px auto;
+    }
+    thead{
+        tr{
+            th{
+                border-bottom: 3px solid #e3e3e3;
+                padding:10px 0;
+            }
+        }
+    }
+    tody{
+        width: 80%;
+    }
+    tr{
+        td{
+            border-bottom: 1px solid #e3e3e3;
+            max-width: 200px;
+            min-width: 100px;
+            padding: 5px 10px;
+            font-size: 14px;
+            word-wrap: break-word;
+        }
+
+    }
+
+}
+.pagination{
+    margin:20px auto;
+    position: sticky;
+    bottom: 0;
+    width: 70%;
+    background-color:#ffffff;
+    ul{
+        list-style-type: none;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        li{
+            padding: 4px 8px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.6);
+            margin: 5px 5px;
+            cursor: pointer;
+            background-color: #5FADE3;
+            color:#ffffff;
+            &.active{
+                background-color: #e3e3e3;
+                color:#000000;
+            }
+        }
+    }
+}
