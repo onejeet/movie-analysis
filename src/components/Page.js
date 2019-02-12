@@ -6,9 +6,9 @@ class Page extends Component {
 
 
     render() {
-        const {page, updatecurrentListStart} = this.props;
+        const {pageid, icon, updatecurrentListStart} = this.props;
         return (
-            <li id={page} className={"class-"+page} onClick = {(e) => updatecurrentListStart(e)}>{page}</li>
+            <li id={pageid} className={"class-"+pageid} onClick = {(e) => updatecurrentListStart(e)}>{icon}</li>
         );
     }
 }

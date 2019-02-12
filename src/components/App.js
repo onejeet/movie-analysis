@@ -21,9 +21,6 @@ class App extends Component {
     }
 
     componentDidUpdate(){
-        $('.pagination li').removeClass('active');
-        let id = this.state.currentListStart !== 0 ? ((this.state.currentListStart/10)+1) : this.state.currentListStart+1;
-        $('.pagination li.class-'+(id)).addClass('active');
     }
 
     loadData = () => {
@@ -59,13 +56,13 @@ class App extends Component {
     }
 
     updatecurrentListStart = (e) => {
-        let newStartIndex = ($(e.target)[0].id * 10) - 10;
+        let newStartIndex = parseInt($(e.target)[0].id);
         this.setState({ currentListStart: newStartIndex})
     }
 
-    displayCurrentList = (moviesList) => {
+    displayCurrentList = (movies) => {
         const {currentListStart}  = this.state;
-        return moviesList.slice(currentListStart, currentListStart+11);
+        return movies.slice(currentListStart, currentListStart+10);
     }
 
     getFiltersData = (type) => {
@@ -92,12 +89,12 @@ class App extends Component {
 
     render() {
         const {movies, filterr, filterrColumn ,currentListStart, theme} = this.state;
-        var moviesFinal = this.filterMovies(filterr, filterrColumn);
-        var moviesList = this.displayCurrentList(moviesFinal);
+        var moviesSet = this.filterMovies(filterr, filterrColumn);
+        var moviesList = this.displayCurrentList(moviesSet);
         return (
             <Home
             moviesList = {moviesList}
-            movies = {moviesFinal}
+            moviesSet = {moviesSet}
             filterr = {filterr}
             updatefilterr = {this.updatefilterr}
             currentListStart = {currentListStart}

@@ -9,7 +9,7 @@ import $ from 'jquery';
 class Home extends Component {
 
     render() {
-        const {filterr,movies,  moviesList, currentListStart, updatecurrentListStart, filterMovies, updatefilterr, theme, getFiltersData} = this.props;
+        const {filterr, moviesList, moviesSet, currentListStart, updatecurrentListStart, filterMovies, updatefilterr, theme, getFiltersData} = this.props;
         let years = getFiltersData('year');
         let countries = getFiltersData('country');
         let ratings = getFiltersData('rating');
@@ -86,7 +86,7 @@ class Home extends Component {
             </div>
             <div className="pagination">
                 <Pagination
-                movies = {movies}
+                moviesSet = {moviesSet}
                 currentListStart = {currentListStart}
                 updatecurrentListStart = {updatecurrentListStart}
                 />

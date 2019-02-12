@@ -5,31 +5,39 @@ import $ from 'jquery';
 
 class Home extends Component {
 
-    generatePagination = () => {
-        const {movies, currentListStart}  = this.props;
-        let totalMovies = movies.length;
-        let totalPages = totalMovies/10;
+    generatePaginationIds = () => {
+        const {moviesSet, currentListStart}  = this.props;
         let pages = [];
-        for( let i = 0; i< totalPages; i++){
-            pages.push(i+1);
+        if(moviesSet[currentListStart-10] !== undefined){
+            pages[0] = currentListStart-10;
+        }else{
+            pages[0] = null;
+        }
+
+        if(moviesSet[currentListStart+10] !== undefined){
+            pages[1] = currentListStart+10;
+        }else{
+            pages[1] = null;
         }
         return pages;
     }
 
 
     render() {
-        const {moviesList, currentListStart, updatecurrentListStart} = this.props;
-        let pages = this.generatePagination();
-
+        const { updatecurrentListStart } = this.props;
+        let pages = this.generatePaginationIds();
         return (
             <ul>
-                {pages.map((page, i) =>
-                    <Page
-                    key = {page}
-                    page = {page}
-                    updatecurrentListStart = {updatecurrentListStart}
-                    />
-                )}
+                {pages[0] !== null ? <Page
+                pageid = {pages[0]}
+                updatecurrentListStart = {updatecurrentListStart}
+                icon = '◄'
+                /> : ''}
+                {pages[1] !== null ? <Page
+                pageid = {pages[1]}
+                updatecurrentListStart = {updatecurrentListStart}
+                icon = '►'
+                /> : ''}
             </ul>
         );
     }

@@ -69,12 +69,13 @@ table.movie-list{
         justify-content: center;
         flex-wrap: wrap;
         li{
-            padding: 4px 8px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.6);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
             margin: 5px 5px;
             cursor: pointer;
             background-color: #5FADE3;
-            color:#ffffff;
+            color: #ffffff;
+            font-size: 30px;
+            padding: 2px 15px;
             &.active{
                 background-color: #e3e3e3;
                 color:#000000;
