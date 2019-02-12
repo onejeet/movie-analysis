@@ -37,6 +37,8 @@ a{
         margin: 10px 20px;
         select{
             padding: 8px 15px;
+            border-radius: 3px;
+            border-width: 2px;
         }
     }
     a{
@@ -61,6 +63,11 @@ a{
                 th{
                     border-bottom: 3px solid $bxshadowcolor;
                     padding:10px 0;
+                    select{
+                        margin: 5px auto;
+                        padding: 2px;
+                        border-radius: 3px;
+                    }
                 }
             }
         }
@@ -68,7 +75,7 @@ a{
             td{
                 border-bottom: 1px solid $bxshadowcolor;
                 max-width: 200px;
-                min-width: 100px;
+                min-width: 70px;
                 padding: 5px 5px;
                 font-size: 14px;
                 word-wrap: break-word;
