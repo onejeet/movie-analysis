@@ -1,7 +1,6 @@
 import React,{ Component } from 'react';
 import Page from './Page';
 import '../sass/style.scss';
-import $ from 'jquery';
 
 class Home extends Component {
 

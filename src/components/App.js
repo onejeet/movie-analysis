@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
-import Login from './Login';
 import  Home from './Home';
-//import { Route, Switch, Redirect } from 'react-router-dom';
 import $ from 'jquery';
 
 
@@ -15,7 +13,8 @@ class App extends Component {
             language:'all',
             country:'all',
             rating:'all',
-            year:'all'
+            year:'all',
+            budget:'all'
         },
         theme:'light'
     }
@@ -79,12 +78,15 @@ class App extends Component {
     getFiltersData = (type) => {
         const {movies} = this.state;
         let list;
-        if(type !== "genres"){
+        if(type !== "genres" && type !== "budget"){
             list = movies.map((movie) => movie[type]);
+        }else if(type === "budget"){
+            let budget = movies.map((movie) => movie[type]);
+            list = [0, Math.max(...budget)];
         }else{
             list = movies.map((movie) => movie[type]);
         }
-        return [...new Set(list.flat())].sort().reverse();
+        return [...new Set(list.flat())].sort().filter((el) => el !== "" );
     }
 
     filterMovies = () => {
@@ -93,14 +95,20 @@ class App extends Component {
         filterredMovies = movies.filter((movie) => {
             for (let key in filterr){
                 if (filterr.hasOwnProperty(key)) {
-                    if(key !== 'genres'){
+                    if(key !== 'genres' && key !== 'budget'){
                         if((filterr[key]=== 'all') || movie[key] === filterr[key]){
                             continue;
                         }else{
                             return false;
                         }
-                    } else {
+                    } else if(key !== 'budget') {
                         if((filterr[key]=== 'all') || movie[key].find((val) => val===filterr[key])){
+                            continue;
+                        }else{
+                            return false;
+                        }
+                    } else {
+                        if((filterr[key]=== 'all') || movie[key] < parseInt(filterr[key])){
                             continue;
                         }else{
                             return false;
@@ -125,7 +133,6 @@ class App extends Component {
             updatefilterr = {this.updatefilterr}
             currentListStart = {currentListStart}
             theme = {theme}
-            filterrMovies = {this.filterrMovies}
             updatecurrentListStart = {this.updatecurrentListStart}
             getFiltersData = {this.getFiltersData}
             updateTheme = {this.updateTheme}

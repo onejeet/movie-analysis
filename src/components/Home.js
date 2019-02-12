@@ -1,5 +1,4 @@
 import React,{ Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import Header from './Header';
 import Pagination from './Pagination';
 import  MovieItem from './MovieItem';
@@ -9,12 +8,17 @@ import $ from 'jquery';
 class Home extends Component {
 
     render() {
-        const {filterr, moviesList, moviesSet, currentListStart, updatecurrentListStart, filterMovies, updatefilterr, theme, getFiltersData, updateTheme} = this.props;
-        let years = getFiltersData('year');
+        const {filterr, moviesList, moviesSet, currentListStart, updatecurrentListStart, updatefilterr, theme, getFiltersData, updateTheme} = this.props;
+        let years = getFiltersData('year').reverse();
+        console.log(years);
         let countries = getFiltersData('country');
         let ratings = getFiltersData('rating');
         let languages = getFiltersData('language');
         let genres = getFiltersData('genres');
+        let budget = getFiltersData('budget');
+        let budgetMax = parseInt(budget[1]);
+        let budgetTwoThird = parseInt(budget[1]*0.6666);
+        let budgetOneThird = parseInt(budget[1]*0.3333);
 
         return (
         <div className="main">
@@ -73,7 +77,17 @@ class Home extends Component {
                                 )}
                                 </select>
                             </th>
-                            <th>Budget</th>
+                            <th>Budget
+                                <select
+                                value={filterr.budget}
+                                onChange={(event) => updatefilterr(event.target.value, $(event.target).parent().text().split(' ')[0].toLowerCase())}
+                                >
+                                <option value="all"> all </option>
+                                <option value={budgetMax}> 0 to {'$'+budgetMax.toLocaleString()} </option>
+                                <option value={budgetTwoThird}>0 to {'$'+budgetTwoThird.toLocaleString()} </option>
+                                <option value={budgetOneThird}> 0 to {'$'+budgetOneThird.toLocaleString()} </option>
+                                </select>
+                            </th>
                             <th>Year
                                 <select
                                 value={filterr.year}
