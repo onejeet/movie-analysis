@@ -11,7 +11,7 @@ class MovieItem extends Component {
                     <td>{movie.title}</td>
                     <td>{movie.director}</td>
                     <td>{movie.actors.join()}</td>
-                    <td>{movie.genres.join()}</td>
+                    <td>{movie.genres.join(', ')}</td>
                     <td>{movie.language}</td>
                     <td>{movie.country}</td>
                     <td>{movie.rating}</td>

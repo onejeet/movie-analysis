@@ -58,7 +58,6 @@ class App extends Component {
     updatefilterr = (newFilter, type) => {
         const { filterr } = this.state;
         filterr[type] = newFilter;
-        console.log(this.state.filterr[type]);
         this.setState({filterr:filterr});
     }
 
@@ -78,9 +77,9 @@ class App extends Component {
         if(type !== "genres"){
             list = movies.map((movie) => movie[type]);
         }else{
-            list = movies.map((movie) => movie[type].map(genre => genre));
+            list = movies.map((movie) => movie[type]);
         }
-        return [...new Set(list)].sort().reverse();
+        return [...new Set(list.flat())].sort().reverse();
     }
 
     filterMovies = () => {
@@ -89,11 +88,18 @@ class App extends Component {
         filterredMovies = movies.filter((movie) => {
             for (let key in filterr){
                 if (filterr.hasOwnProperty(key)) {
-                    if((filterr[key]=== 'all') || movie[key] === filterr[key]){
-                        continue;
-                        console.log('inside');
-                    }else{
-                        return false;
+                    if(key !== 'genres'){
+                        if((filterr[key]=== 'all') || movie[key] === filterr[key]){
+                            continue;
+                        }else{
+                            return false;
+                        }
+                    } else {
+                        if((filterr[key]=== 'all') || movie[key].find((val) => val===filterr[key])){
+                            continue;
+                        }else{
+                            return false;
+                        }
                     }
                 }
             }

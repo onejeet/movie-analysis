@@ -14,6 +14,7 @@ class Home extends Component {
         let countries = getFiltersData('country');
         let ratings = getFiltersData('rating');
         let languages = getFiltersData('language');
+        let genres = getFiltersData('genres');
 
         return (
         <div className="main">
@@ -25,7 +26,17 @@ class Home extends Component {
                             <th>Name</th>
                             <th>Director</th>
                             <th>Actors</th>
-                            <th>Genres</th>
+                            <th>Genres
+                                <select
+                                value={filterr.genres}
+                                onChange={(event) => updatefilterr(event.target.value, $(event.target).parent().text().split(' ')[0].toLowerCase())}
+                                >
+                                <option value="all"> all </option>
+                                {genres.map((genre) =>
+                                    <option key={genre} value={genre}> {genre} </option>
+                                )}
+                                </select>
+                            </th>
                             <th>Language
                                 <select
                                 value={filterr.language}
