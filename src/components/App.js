@@ -11,8 +11,12 @@ class App extends Component {
     state = {
         movies:[],
         currentListStart:0,
-        filterr:'all',
-        filterrColumn: '',
+        filterr:{
+            language:'all',
+            country:'all',
+            rating:'all',
+            year:'all'
+        },
         theme:'light'
     }
 
@@ -51,8 +55,11 @@ class App extends Component {
 
     }
 
-    updatefilterr = (filterr, column) => {
-        this.setState({filterr: filterr, filterrColumn:column})
+    updatefilterr = (newFilter, type) => {
+        const { filterr } = this.state;
+        filterr[type] = newFilter;
+        console.log(this.state.filterr[type]);
+        this.setState({filterr:filterr});
     }
 
     updatecurrentListStart = (e) => {
@@ -76,20 +83,28 @@ class App extends Component {
         return [...new Set(list)].sort().reverse();
     }
 
-    filterMovies = (filterr, column) => {
-        const {movies} = this.state;
+    filterMovies = () => {
+        const {movies, filterr} = this.state;
         let filterredMovies = movies;
-        if(column !== 'genres' && column !== '' && filterr !== 'all'){
-            filterredMovies = movies.filter((movie) => movie[column] === filterr);
-        }else if(column !== '' && filterr !== 'all'){
-            filterredMovies = movies.filter((movie) => movie['column'].find(el => el===filterr));
-        }
+        filterredMovies = movies.filter((movie) => {
+            for (let key in filterr){
+                if (filterr.hasOwnProperty(key)) {
+                    if((filterr[key]=== 'all') || movie[key] === filterr[key]){
+                        continue;
+                        console.log('inside');
+                    }else{
+                        return false;
+                    }
+                }
+            }
+            return true;
+        });
         return filterredMovies;
     }
 
     render() {
-        const {movies, filterr, filterrColumn ,currentListStart, theme} = this.state;
-        var moviesSet = this.filterMovies(filterr, filterrColumn);
+        const {movies,filterr,currentListStart, theme} = this.state;
+        var moviesSet = this.filterMovies();
         var moviesList = this.displayCurrentList(moviesSet);
         return (
             <Home

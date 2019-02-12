@@ -28,7 +28,7 @@ class Home extends Component {
                             <th>Genres</th>
                             <th>Language
                                 <select
-                                value={filterr}
+                                value={filterr.language}
                                 onChange={(event) => updatefilterr(event.target.value, $(event.target).parent().text().split(' ')[0].toLowerCase())}
                                 >
                                 <option value="all"> all </option>
@@ -39,7 +39,7 @@ class Home extends Component {
                             </th>
                             <th>Country
                                 <select
-                                value={filterr}
+                                value={filterr.country}
                                 onChange={(event) => updatefilterr(event.target.value, $(event.target).parent().text().split(' ')[0].toLowerCase())}
                                 >
                                 <option value="all"> all </option>
@@ -50,7 +50,7 @@ class Home extends Component {
                             </th>
                             <th>Rating
                                 <select
-                                value={filterr}
+                                value={filterr.rating}
                                 onChange={(event) => updatefilterr(event.target.value, $(event.target).parent().text().split(' ')[0].toLowerCase())}
                                 >
                                 <option value="all"> all </option>
@@ -62,7 +62,7 @@ class Home extends Component {
                             <th>Budget</th>
                             <th>Year
                                 <select
-                                value={filterr}
+                                value={filterr.year}
                                 onChange={(event) => updatefilterr(event.target.value, $(event.target).parent().text().split(' ')[0].toLowerCase())}
                                 >
                                 <option value="all"> all </option>

@@ -17,7 +17,7 @@ class MovieItem extends Component {
                     <td>{movie.rating}</td>
                     <td>{movie.budget ? "$"+movie.budget.toLocaleString() : " "}</td>
                     <td>{movie.year}</td>
-                    <td><a href={movie.imdb_link} target="_blank" rel="noopener"> IMDB Page </a></td>
+                    <td><a href={movie.imdb_link} target="_blank" rel="noopener noreferrer"> IMDB Page </a></td>
                 </tr>
         );
 
