@@ -9,7 +9,7 @@ import $ from 'jquery';
 class Home extends Component {
 
     render() {
-        const {filterr, moviesList, moviesSet, currentListStart, updatecurrentListStart, filterMovies, updatefilterr, theme, getFiltersData} = this.props;
+        const {filterr, moviesList, moviesSet, currentListStart, updatecurrentListStart, filterMovies, updatefilterr, theme, getFiltersData, updateTheme} = this.props;
         let years = getFiltersData('year');
         let countries = getFiltersData('country');
         let ratings = getFiltersData('rating');
@@ -18,7 +18,10 @@ class Home extends Component {
 
         return (
         <div className="main">
-            <Header/>
+            <Header
+            theme = {theme}
+            updateTheme = {updateTheme}
+            />
             <div className="grid" role="grid">
                     <table className="movie-list container">
                     <thead>

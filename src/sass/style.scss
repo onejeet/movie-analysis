@@ -3,6 +3,9 @@
     margin: 0;
     box-sizing: border-box;
 }
+a{
+    text-decoration: none;
+}
 
 @mixin container(){
     width: 50%;
@@ -20,66 +23,98 @@
     }
 }
 
-.branding{
-    text-align: center;
-    margin:10px auto 30px;
-}
-
-table.movie-list{
-    margin:0 auto;
-    width: 90%;
-    text-align: center;
-    select{
-        display: block;
-        margin:8px auto;
+@mixin main($bgcolor, $color, $bxshadowcolor){
+    .branding{
+        text-align: center;
+        margin: 0px auto 20px;
+        box-shadow: 0 2px 5px $bxshadowcolor;
+        padding: 8px 0;
     }
-    thead{
+    .theme{
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 10px 20px;
+        select{
+            padding: 8px 15px;
+        }
+    }
+    a{
+        color:$color;
+        &:hover{
+            color:red;
+        }
+    }
+    table.movie-list{
+        margin:0 auto;
+        width: 90%;
+        text-align: center;
+        color:$color;
+        select{
+            display: block;
+            margin:8px auto;
+        }
+        thead{
+            position: sticky;
+            top: 0;
+            tr{
+                th{
+                    border-bottom: 3px solid $bxshadowcolor;
+                    padding:10px 0;
+                }
+            }
+        }
         tr{
-            th{
-                border-bottom: 3px solid #e3e3e3;
-                padding:10px 0;
+            td{
+                border-bottom: 1px solid $bxshadowcolor;
+                max-width: 200px;
+                min-width: 100px;
+                padding: 5px 5px;
+                font-size: 14px;
+                word-wrap: break-word;
+            }
+
+        }
+
+    }
+    .pagination{
+        margin:20px auto;
+        position: sticky;
+        bottom: 0;
+        width: 100%;
+        ul{
+            list-style-type: none;
+            display: flex;
+            justify-content: flex-end;
+            width: 90%;
+            margin: 0 auto;
+            li{
+                box-shadow: 0 1px 3px $bxshadowcolor;
+                margin: 5px 5px;
+                color: $color;
+                font-size: 30px;
+                padding: 2px 30px;
+                border-radius: 3px;
+                background-color: $bgcolor;
+                i{
+                    cursor: pointer;
+                    color:#000000;
+                    z-index: 100;
+                    .fa-chevron-circle-right{
+
+                    }
+                }
             }
         }
     }
-    tody{
-        width: 80%;
-    }
-    tr{
-        td{
-            border-bottom: 1px solid #e3e3e3;
-            max-width: 200px;
-            min-width: 100px;
-            padding: 5px 10px;
-            font-size: 14px;
-            word-wrap: break-word;
-        }
-
-    }
-
 }
-.pagination{
-    margin:20px auto;
-    position: sticky;
-    bottom: 0;
-    width: 70%;
-    background-color:#ffffff;
-    ul{
-        list-style-type: none;
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        li{
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-            margin: 5px 5px;
-            cursor: pointer;
-            background-color: #5FADE3;
-            color: #ffffff;
-            font-size: 30px;
-            padding: 2px 15px;
-            &.active{
-                background-color: #e3e3e3;
-                color:#000000;
-            }
-        }
-    }
+.light-theme{
+    @include main(#ffff99, #000000, #e3e3e3);
+    background-color: #ffffff;
+    color:#000000;
+}
+.dark-theme{
+    @include main(#ffff99, #ffffff, #e3e3e3);
+    background-color: #000000;
+    color:#ffffff;
 }

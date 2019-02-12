@@ -25,6 +25,8 @@ class App extends Component {
     }
 
     componentDidUpdate(){
+        $('body').removeAttr('class');
+        $('body').addClass(this.state.theme+'-theme');
     }
 
     loadData = () => {
@@ -53,6 +55,9 @@ class App extends Component {
             console.log('API Not Responding'+error)
         });
 
+    }
+    updateTheme = (theme) => {
+        this.setState({theme:theme});
     }
 
     updatefilterr = (newFilter, type) => {
@@ -123,6 +128,7 @@ class App extends Component {
             filterrMovies = {this.filterrMovies}
             updatecurrentListStart = {this.updatecurrentListStart}
             getFiltersData = {this.getFiltersData}
+            updateTheme = {this.updateTheme}
             />
         );
         }

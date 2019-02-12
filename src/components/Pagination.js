@@ -31,12 +31,12 @@ class Home extends Component {
                 {pages[0] !== null ? <Page
                 pageid = {pages[0]}
                 updatecurrentListStart = {updatecurrentListStart}
-                icon = '◄'
+                icon = 'fa-chevron-circle-left'
                 /> : ''}
                 {pages[1] !== null ? <Page
                 pageid = {pages[1]}
                 updatecurrentListStart = {updatecurrentListStart}
-                icon = '►'
+                icon = 'fa-chevron-circle-right'
                 /> : ''}
             </ul>
         );
