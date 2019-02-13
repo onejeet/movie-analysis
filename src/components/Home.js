@@ -1,5 +1,6 @@
 import React,{ Component } from 'react';
 import Header from './Header';
+import Footer from './Footer';
 import Pagination from './Pagination';
 import  MovieItem from './MovieItem';
 import '../sass/style.scss';
@@ -10,11 +11,12 @@ class Home extends Component {
     render() {
         const {filterr, moviesList, moviesSet, currentListStart, updatecurrentListStart, updatefilterr, theme, getFiltersData, updateTheme} = this.props;
         let years = getFiltersData('year').reverse();
-        console.log(years);
         let countries = getFiltersData('country');
         let ratings = getFiltersData('rating');
         let languages = getFiltersData('language');
         let genres = getFiltersData('genres');
+        let actors = getFiltersData('actors');
+        let directors = getFiltersData('director');
         let budget = getFiltersData('budget');
         let budgetMax = parseInt(budget[1]);
         let budgetTwoThird = parseInt(budget[1]*0.6666);
@@ -31,8 +33,28 @@ class Home extends Component {
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Director</th>
-                            <th>Actors</th>
+                            <th>Director
+                                <select
+                                value={filterr.director}
+                                onChange={(event) => updatefilterr(event.target.value, $(event.target).parent().text().split(' ')[0].toLowerCase())}
+                                >
+                                <option value="all"> all </option>
+                                {directors.map((d) =>
+                                    <option key={d} value={d}> {d} </option>
+                                )}
+                                </select>
+                            </th>
+                            <th>Actors
+                                <select
+                                value={filterr.actors}
+                                onChange={(event) => updatefilterr(event.target.value, $(event.target).parent().text().split(' ')[0].toLowerCase())}
+                                >
+                                <option value="all"> all </option>
+                                {actors.map((actor) =>
+                                    <option key={actor} value={actor}> {actor} </option>
+                                )}
+                                </select>
+                            </th>
                             <th>Genres
                                 <select
                                 value={filterr.genres}
@@ -83,9 +105,9 @@ class Home extends Component {
                                 onChange={(event) => updatefilterr(event.target.value, $(event.target).parent().text().split(' ')[0].toLowerCase())}
                                 >
                                 <option value="all"> all </option>
-                                <option value={budgetMax}> 0 to {'$'+budgetMax.toLocaleString()} </option>
-                                <option value={budgetTwoThird}>0 to {'$'+budgetTwoThird.toLocaleString()} </option>
-                                <option value={budgetOneThird}> 0 to {'$'+budgetOneThird.toLocaleString()} </option>
+                                <option value={budgetMax}>$0 - {'$'+budgetMax.toLocaleString()} </option>
+                                <option value={budgetTwoThird}>$0 - {'$'+budgetTwoThird.toLocaleString()} </option>
+                                <option value={budgetOneThird}>$0 - {'$'+budgetOneThird.toLocaleString()} </option>
                                 </select>
                             </th>
                             <th>Year
@@ -99,16 +121,16 @@ class Home extends Component {
                                 )}
                                 </select>
                             </th>
-                            <th>IMDB</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {moviesList.map((movie, i) =>
+                        {moviesList.length>0 ? moviesList.map((movie, i) =>
                                 <MovieItem
                                 key = {i}
                                 movie = {movie}
+                                updatefilterr = {updatefilterr}
                                 />
-                        )}
+                        ): null}
                         </tbody>
                     </table>
             </div>
@@ -119,6 +141,7 @@ class Home extends Component {
                 updatecurrentListStart = {updatecurrentListStart}
                 />
             </div>
+            <Footer/>
         </div>
         );
     }

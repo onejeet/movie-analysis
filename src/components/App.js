@@ -3,8 +3,6 @@ import '../App.css';
 import  Home from './Home';
 import $ from 'jquery';
 
-
-
 class App extends Component {
     state = {
         movies:[],
@@ -14,7 +12,10 @@ class App extends Component {
             country:'all',
             rating:'all',
             year:'all',
-            budget:'all'
+            budget:'all',
+            genres:'all',
+            actors:'all',
+            director:'all'
         },
         theme:'light'
     }
@@ -31,7 +32,7 @@ class App extends Component {
     loadData = () => {
         const {movies} = this.state;
         let movie;
-        const url = `http://starlord.hackerearth.com/movies`;
+        //const url = `http://starlord.hackerearth.com/movies`;
 
         //fetch data from API
         fetch('/api/data.json')
@@ -89,13 +90,20 @@ class App extends Component {
         return [...new Set(list.flat())].sort().filter((el) => el !== "" );
     }
 
+    toggleSort = (moviesList, type) => {
+        const {movies, sorting} = this.state;
+        movies.sort((obj1, obj2)=> {
+            return obj1[type]-obj2[type];
+        })
+    }
+
     filterMovies = () => {
         const {movies, filterr} = this.state;
         let filterredMovies = movies;
         filterredMovies = movies.filter((movie) => {
             for (let key in filterr){
                 if (filterr.hasOwnProperty(key)) {
-                    if(key !== 'genres' && key !== 'budget'){
+                    if(key !== 'genres' && key !== 'actors' &&  key !== 'budget'){
                         if((filterr[key]=== 'all') || movie[key] === filterr[key]){
                             continue;
                         }else{
@@ -122,9 +130,11 @@ class App extends Component {
     }
 
     render() {
-        const {movies,filterr,currentListStart, theme} = this.state;
+        const {filterr,currentListStart, theme} = this.state;
         var moviesSet = this.filterMovies();
+        this.toggleSort(moviesSet);
         var moviesList = this.displayCurrentList(moviesSet);
+        this.toggleSort(moviesList);
         return (
             <Home
             moviesList = {moviesList}

@@ -8,7 +8,7 @@ class Page extends Component {
     render() {
         const {pageid, icon, updatecurrentListStart} = this.props;
         return (
-            <li><i id={pageid} className={"class-"+pageid} onClick = {(e) => updatecurrentListStart(e)} className={"fa "+icon} aria-hidden="true"></i></li>
+            <li><i id={pageid} onClick = {(e) => updatecurrentListStart(e)} className={"fa "+icon} aria-hidden="true"></i></li>
         );
     }
 }
