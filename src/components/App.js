@@ -21,6 +21,7 @@ class App extends Component {
     }
 
     componentDidMount(){
+        $('body').addClass(this.state.theme+'-theme');
         this.loadData();
     }
 
