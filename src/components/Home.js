@@ -32,7 +32,7 @@ class Home extends Component {
                     <table className="movie-list container">
                     <thead>
                         <tr>
-                            <th>Name</th>
+                            <th>Title</th>
                             <th>Director
                                 <select
                                 value={filterr.director}

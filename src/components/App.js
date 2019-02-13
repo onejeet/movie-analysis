@@ -90,13 +90,6 @@ class App extends Component {
         return [...new Set(list.flat())].sort().filter((el) => el !== "" );
     }
 
-    toggleSort = (moviesList, type) => {
-        const {movies, sorting} = this.state;
-        movies.sort((obj1, obj2)=> {
-            return obj1[type]-obj2[type];
-        })
-    }
-
     filterMovies = () => {
         const {movies, filterr} = this.state;
         let filterredMovies = movies;
@@ -130,11 +123,9 @@ class App extends Component {
     }
 
     render() {
-        const {filterr,currentListStart, theme} = this.state;
-        var moviesSet = this.filterMovies();
-        this.toggleSort(moviesSet);
-        var moviesList = this.displayCurrentList(moviesSet);
-        this.toggleSort(moviesList);
+        const {filterr,currentListStart, theme, sorting} = this.state;
+        let moviesSet = this.filterMovies();
+        let moviesList = this.displayCurrentList(moviesSet);
         return (
             <Home
             moviesList = {moviesList}
@@ -146,6 +137,7 @@ class App extends Component {
             updatecurrentListStart = {this.updatecurrentListStart}
             getFiltersData = {this.getFiltersData}
             updateTheme = {this.updateTheme}
+            updateSorting = {this.updateSorting}
             />
         );
         }
