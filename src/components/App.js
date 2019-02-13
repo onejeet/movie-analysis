@@ -33,10 +33,10 @@ class App extends Component {
     loadData = () => {
         const {movies} = this.state;
         let movie;
-        //const url = `http://starlord.hackerearth.com/movies`;
+        const url = `http://starlord.hackerearth.com/movies`;
 
         //fetch data from API
-        fetch('/api/data.json')
+        fetch(url, {'mode':'cors','Access-Control-Allow-Credentials': true})
         .then((response) => {
             response.json().then((data) => {
                 if (response.status === 200) {
