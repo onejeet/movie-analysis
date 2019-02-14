@@ -33,10 +33,11 @@ class App extends Component {
     loadData = () => {
         const {movies} = this.state;
         let movie;
-        //const url = `http://starlord.hackerearth.com/movies`;
-
+        const url = `http://starlord.hackerearth.com/movies`;
+        //NOTE: USE Plugin: Allow-control-allow-origin for CROSS Browser Requests
+        
         //fetch data from API
-        fetch('/api/data.json')
+        fetch(url)
         .then((response) => {
             response.json().then((data) => {
                 if (response.status === 200) {
