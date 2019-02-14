@@ -34,9 +34,10 @@ class App extends Component {
         const {movies} = this.state;
         let movie;
         const url = `http://starlord.hackerearth.com/movies`;
-
+        //NOTE: USE Plugin: Allow-control-allow-origin for CROSS Browser Requests
+        
         //fetch data from API
-        fetch(url, {'mode':'cors','Access-Control-Allow-Credentials': true})
+        fetch(url)
         .then((response) => {
             response.json().then((data) => {
                 if (response.status === 200) {
